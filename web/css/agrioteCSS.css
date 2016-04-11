@@ -1,0 +1,57 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17 mars 2016, 23:49:27
+    Author     : sandrineperrin
+*/
+
+body{padding:0px; margin:0px; background:url(images/mainbg.jpg) 0 0 repeat-x #fff; color:#707070; font:18px/20px "Trebuchet MS", Arial, Helvetica, sans-serif;}
+div, p, ul, h2, h3, img{padding:0px; margin:0px;}
+ul{list-style-type:none;}
+
+
+/*----ENTETE----*/
+#entete{width:747px; height:152px; position:relative; margin:0 auto; padding:0px;}
+#entete img{width:208px; height:58px; position:absolute; top:35px; left:0px;}
+
+#entete ul{width:480px; height:32px; position:absolute; top:76px; right:0px;}
+#entete ul li{float:left; width:79px; height:32px; padding:0 0 0 1px;}
+#entete ul li a{display:block; width:79px; height:32px; background:url(images/menubg-normal.gif) 0 0 no-repeat #7E7B00; color:#656565; font-size:11px; font-weight:bold; line-height:32px; text-transform:uppercase; text-align:center; text-decoration:none;}
+#entete ul li a:hover{background:url(images/menubg-hover.gif) 0 0 no-repeat #7E7B00; color:#7C7900; text-decoration:none;}
+
+#entete ul li.home{display:block; width:79px; height:32px; background:url(images/menubg-hover.gif) 0 0 no-repeat #7E7B00; font-size:11px; font-weight:bold; line-height:32px; color:#7C7900; text-decoration:none; text-transform:uppercase; text-align:center;}
+
+#entete ul.sousMenu{width:480px; height:22px; position:absolute; top:119px; right:0px;}
+#entete ul.sousMenu li{float:left; width:79px; height:22px; }
+#entete ul.sousMenu li button, #entete ul.sousMenu li a{display:block; width:79px;background:url(images/vertical-dot.gif) 100% 0 no-repeat #fff; color:#3E3E3E; font-size:11px; text-decoration:none; text-align:center; line-height:22px; border: none;} 
+#entete ul.sousMenu li button:hover, #entete ul.sousMenu li a:hover{text-decoration:none; background:url(images/vertical-dot.gif) 100% 0 no-repeat #fff; color:#7C7900;border: none;}
+
+#entete ul.sousMenu li.sousMenuAligne button, #entete ul.sousMenu li.sousMenuAligne a{display:block; width:79px;background:#fff; color:#3E3E3E; font-size:11px; text-decoration:none; text-align:center; line-height:27px;border: none;} 
+#entete ul.sousMenu li.sousMenuAligne button:hover, #entete ul.sousMenu li.sousMenuAligne a:hover{text-decoration:none; background:#fff; color:#7C7900;border: none;}
+/*----/ENTETE----*/
+
+/*----CORPS----*/
+#corps{color:#8D8D8D;  clear:both;}
+#corps{width:65%; position:relative; background:#F4F4F4; color:#707070; margin:0 auto; padding:10%; padding-top:5%;}
+#corps h2{background:#F4F4F4; color:#6E6C00; font-size:24px; height:70px; line-height:70px;}
+#corps p{padding:0 38px 11px 0;}
+/*----/CORPS----*/
+
+
+/*----FOOTER----*/
+#footer{height:90px; background-color:#575757; clear:both;}
+/*----/FOOTER----*/
+
+
+/*----COMMUN----*/
+/*----Messages d'erreur---*/
+.erreurMess {font-size:15px; font-style:italic; color:red;}
+/*----Autres---*/
+select {margin-bottom:2%;}
+button, option, input {font-size:14px;}
+/*----/COMMUN----*/
+
+

@@ -1,0 +1,107 @@
+div#intitule
+{
+    margin-top: 30px; 
+    margin-left: 50px;
+}
+
+div#intitule  a
+{
+    text-decoration: none;
+    color: #551A8B;
+}
+
+div#intitule  a:visited
+{
+    color: #551A8B;
+}
+
+#puce
+{
+    width: 8px;
+    margin-right: 10px;
+}
+
+hr
+{
+    position: relative;
+    width: 500px;
+    margin-right: 0%;
+}
+
+hr.tab
+{
+    position: relative;
+    width: 250px;
+    margin-right: 0%;
+}
+
+#nbCandid
+{
+    float: right;
+    margin-right: 7%;
+    font-size: 0.8em;
+}
+
+corps
+{
+    width: 65%;
+    padding: 5% 18% 10% 5%;
+}
+
+div#menu
+{
+    float: right;
+    font-size: 0.9em;
+    
+    
+    -ms-transform: rotate(-40deg); /* IE 9 */
+    -webkit-transform: rotate(-40deg); /* Chrome, Safari, Opera */
+    transform: rotate(-40deg);
+}
+
+body
+{
+    background-color:#8D8D8D;
+}
+table
+{
+    border-collapse: collapse;
+}
+td, th /* Mettre une bordure sur les td ET les th */
+{
+    border: 1px solid black;
+    text-align: center;
+}
+#titre_session
+{
+    margin-top: -4%;
+    margin-bottom: 3%;
+}
+
+td.nom
+{
+    width: 20%;
+}
+td.prenom
+{
+    width: 20%;
+}
+td.attente
+{
+    width: 17%;
+}
+td
+{
+    padding: 10px 0 10px 0;
+}
+th
+{
+    border: #7E7B00 solid 2px;
+}
+
+img#logo
+{
+    width: 73px;
+    margin-left: -23%;
+    opacity: 0.7;
+}
