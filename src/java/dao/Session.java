@@ -50,12 +50,7 @@ public class Session {
             return result;
     }
 
-    /**
-     * renvoi une liste d'objet sessionCandidate pour un candidat
-     * @param idPersonne
-     * @return
-     * @throws SQLException
-     */
+    /*
     public static List<UneSession> getSessionCandidateByPersonne(int idPersonne) throws SQLException {
             List<UneSession> result = new ArrayList<UneSession>();
             String intituleSession = null;
@@ -80,5 +75,5 @@ public class Session {
 
             return result;
     }
-
+*/
 }

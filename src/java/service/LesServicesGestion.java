@@ -48,9 +48,7 @@ public class LesServicesGestion {
         return compteur;
     }
     
-    public boolean isCandidatPlusieursAcceptation( int idPersonne) throws SQLException{
-        return dao.LesSessions.isCandidatStatutValidePlusieursSessions(idPersonne);
-    }
+    
     
     public int getMaxIdCandidatBySession (int id) throws SQLException {
         UneSession session = dao.Session.getCandidatsBySession(id);

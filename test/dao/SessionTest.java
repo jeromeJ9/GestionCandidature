@@ -43,20 +43,6 @@ public class SessionTest extends DaoTest{
 
     
     
-    /**
-     * Test of getSessionCandidateByPersonne method, of class Session.
-     */
-    @Test
-    public void testGetSessionCandidateByPersonne() throws Exception {
-        System.out.println("getSessionCandidateByPersonne");
-        int idPersonne = 0;
-        List<UneSession> expResult = null;
-        List<UneSession> result = Session.getSessionCandidateByPersonne(idPersonne);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-  
+   
     
 }
