@@ -12,30 +12,7 @@
     <body>
         
     <%--ENTETE--%>
-        <div id="entete"><img src="css/images/logo.png" alt="Agriote" width="208" height="58" border="0" title="Agriote" /></a>
-            <ul>
-                <li class="home"></li>
-            </ul>
-            <ul class="sousMenu">
-            <li><a href="">Accueil</a></li>
-            <li class="sousMenuAligne"><a href="">Mon profil</a></li>
-
-            <ul>
-                <li class="home"></li>
-            </ul>
-            <ul class="sousMenu">
-                <form action="accueil" method="POST">
-                   <li><a href="">ACCUEIL</a></li>
-                </form>
-                <form action="voirProfil" method="POST">
-                   <li><a href="">PROFIL</a></li>
-                </form>
-                <form action="deconnexion" method="POST">
-                   <li class="sousMenuAligne"><a href="">DECONNEXION</a></li>
-                </form>
-               
-            </ul>
-        </div>
+        <c:import url="Entete.jsp"></c:import>
     <%--ENTETE--%>
 
 
@@ -43,56 +20,128 @@
         <div id="corps">
 
             <h2> Candidats pour la session:</h2>
-            <h2 id="titre_session">${detailsSession.getIntituleSession()}</h2>
-                
+            <h2 id="titre_session">${detailsSession.getIntituleSession()}&emsp;${detailsSession.getDateSessionMA()}</h2>
+            <h4 style="margin-top: -10px;">Nombre de places restantes:&emsp;<c:out value="${detailsSession.getNbPlacesRestantes()}"/></h4>
+            <h4 style="color:red;"><c:if test="${tropInscris != null }">trop de candidats validés !!</c:if></h4>
             <form action="DetailCandidatures" METHOD="POST">
-                <table>
+                <table style="margin-top: 60px;">
+                    
                     <tr>
-                        <th>Nom</th>
-                        <th>Prenom</th>
-                        <th>En attente de traitement</th>
-                        <th>Acceptée</th>
-                        <th>Refusée</th>
-                        <th>Mise en attente</th>
+                        <th style ="width: 23%;"></th>
+                        <th style ="width: 23%;"></th>
+                        <th style ="width: 35%;"></th>
+                        <th><p class="titreDetail" style="padding: inherit;top: 185px;">Acceptée</p></th>
+                        <th><p class="titreDetail" style="padding: inherit;top: 189px;">Refusée</p></th>
+                        <th><p class="titreDetail" style="padding: inherit;top: 164px;right: 56px">Mise en attente</p></th>
                     </tr>
 
-                        <c:forEach items="${detailsSession.getListeDePersonnes()}" var="personne">
-                            <tr>
-                                <td class="nom">
-                                   <c:out value="${personne.getNom()}"/></a>
-                                </td>
-                                <td class="prenom">
-                                   <c:out value="${personne.getPrenom()}"/></a>
-                                </td>
-                                <td class="attente">
-                                   <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="0" <c:if test="${personne.getId_etatCandidature() == null}" >
-                                                                                                        checked
-                                                                                                    </c:if>>
-                                </td>
-                                <td class="valide">
-                                   <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="2" <c:if test="${personne.getId_etatCandidature() == 2}" >
-                                                                                        checked
-                                                                                    </c:if>>
-                                </td>
-                                <td class="refuse">
-                                   <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="3"<c:if test="${personne.getId_etatCandidature() == 3}" >
-                                                                                    checked
-                                                                                  </c:if>>
-                                </td>
-                                <td class="mise">
-                                   <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="1"<c:if test="${personne.getId_etatCandidature() == 1}" >
-                                                                                            checked
-                                                                                          </c:if>>
+                    <c:forEach items="${detailsSession.getListeDePersonnes()}" var="personne">
+                    <tr style="border-bottom:  1px #7C7900 solid;">
+                        
+                        <td class="nom" >
+                           <a  id="detailCandid" href ="DetailCandidatures?personne=${personne.getId()}&idSession=${detailsSession.getIdSession()}" >
+                           <c:out value="${personne.getNom()}"/></a>
+                        </td>
+                       
+                        
+                        <td class="prenom" style="text-align: left;">
+                           <c:out value="${personne.getPrenom()}"/>
+                        </td>
+                        <td class="attente">
+                           <c:if test="${personne.getId_etatCandidature() == 0}" >
+                                En attente de traitement
+                           </c:if>
+                          
+                        </td>
+                        
+                                              
+                        <td>
+                           <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="2" 
+                                  <c:if test="${(personne.getId_etatCandidature() == 2) }">checked</c:if> >
+                        </td>
+                        
+                        <td class="refuse">
+                           <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="3"
+                                    <c:if test="${personne.getId_etatCandidature() == 3}" >
+                                        checked
+                                    </c:if>>
+                        </td>
+                        
+                        <td class="mise">
+                           <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="1"
+                                    <c:if test="${personne.getId_etatCandidature() == 1}" >
+                                        checked
+                                    </c:if>>
+                        </td>
+                        
+                        <c:if test="${detail == personne.getId()}">
+                            <c:if test="${listeCandidature.size() > 1}">
+                            <tr id="fondDetail" >
+                                
+                                <td style ="border:none;text-align: left; " colspan="6">
+                                    <span style="margin-bottom: 10px;">
+                                        Autre candidatures:
+                                    </span>
                                 </td>
                             </tr>
-                        </c:forEach>
+                            
+                                <c:forEach items="${listeCandidature}" var="sessions">
+                                   <c:if test="${sessions.key != detailsSession.getIntituleSession()}">
+                                       <tr style="border: none;" id="fondDetail">
+                                           <td colspan="2" style ="text-align: left;border: none;">
+                                               <div style="margin-left: 25px;">
+                                                      . <c:out value="${sessions.key}"/> 
+                                                      
+                                               </div>
+                                           </td>
+                                           <td>
+                                               
+                                              <c:if test="${sessions.value[0] == 'En attente de traitement'}" >
+                                                 En attente de traitement
+                                               </c:if>
+                                               
+                                                  
+                                           </td>
+                                           <td class="valide">
+                                               <INPUT type="radio"  disabled="true"
+                                                <c:if test="${sessions.value[0] == 'Validée'}" >
+                                                   checked
+                                               </c:if>
+                                                   
+                                           </td>
 
+                                           <td class="refuse">
+                                               <INPUT type="radio" disabled="true" 
+                                               <c:if test="${sessions.value[0] == 'Refusé'}" >
+                                                   checked
+                                               </c:if>
+                                           </td>
+
+                                           <td class="mise">
+                                               <INPUT type="radio" disabled="true"
+                                               <c:if test="${sessions.value[0]== 'En attente'}" >
+                                                   checked
+                                               </c:if>
+                                           </td>
+                                       </tr>
+                                       <tr style="border: none;" id="fondDetail">
+                                           <td colspan="6">
+                                               <div style="margin-left: 38px;">
+                                                    <c:out value="${sessions.value[1]}"/> 
+                                               </div>
+                                           </td>
+                                       </tr>
+                                   </c:if>
+                                </c:forEach>
+                            </c:if>     
+                        </c:if> 
+                    </tr >
+                    
+                    </c:forEach>
                 </table>
-                <c:set var="message" value="Salut les zéros !" scope="request" />
-                <input type="submit" value="Submit" style="margin-top: 1%">
-                
+               <input type="submit" value="Valider" style="margin-top: 3%;padding: 5px;">
             </form>
-         <img style="margin-top: -39%;" id="logo" src="css/images/footerLogob.png" alt=""/>   
+         <img  id="logo" src="css/images/footerLogob.png" alt=""/>   
         </div>
     <%--CORPS--%>
 

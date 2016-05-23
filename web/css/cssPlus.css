@@ -1,107 +1,75 @@
-div#intitule
-{
-    margin-top: 30px; 
-    margin-left: 50px;
-}
-
-div#intitule  a
-{
-    text-decoration: none;
-    color: #551A8B;
-}
-
-div#intitule  a:visited
-{
-    color: #551A8B;
-}
-
-#puce
-{
-    width: 8px;
-    margin-right: 10px;
-}
-
-hr
-{
-    position: relative;
-    width: 500px;
-    margin-right: 0%;
-}
-
-hr.tab
-{
-    position: relative;
-    width: 250px;
-    margin-right: 0%;
-}
-
-#nbCandid
-{
-    float: right;
-    margin-right: 7%;
-    font-size: 0.8em;
-}
-
-corps
-{
-    width: 65%;
-    padding: 5% 18% 10% 5%;
-}
-
-div#menu
-{
-    float: right;
-    font-size: 0.9em;
-    
-    
-    -ms-transform: rotate(-40deg); /* IE 9 */
-    -webkit-transform: rotate(-40deg); /* Chrome, Safari, Opera */
-    transform: rotate(-40deg);
-}
-
 body
 {
     background-color:#8D8D8D;
 }
+#detail td 
+{
+    text-align: center;
+    border-bottom:  0.5px #7C7900 solid;
+} 
 table
 {
+    width: 100%;
     border-collapse: collapse;
 }
-td, th /* Mettre une bordure sur les td ET les th */
+#puce
 {
-    border: 1px solid black;
-    text-align: center;
-}
-#titre_session
-{
-    margin-top: -4%;
-    margin-bottom: 3%;
-}
-
-td.nom
-{
-    width: 20%;
-}
-td.prenom
-{
-    width: 20%;
-}
-td.attente
-{
-    width: 17%;
+    width: 7px;
 }
 td
 {
     padding: 10px 0 10px 0;
 }
-th
-{
-    border: #7E7B00 solid 2px;
-}
-
 img#logo
 {
     width: 73px;
-    margin-left: -23%;
     opacity: 0.7;
+    margin-top: -400px;
+    position: relative;
+    margin-left: -233px;
+}
+
+a#detailCandid
+{
+   text-decoration: blink;
+   color: #707070;
+   text-align: left;
+}
+a#detailCandid  a:visited
+{
+    color: #707070;
+}
+
+.titreDetail
+{
+    -ms-transform: rotate(-50deg); /* IE 9 */
+    -webkit-transform: rotate(-50deg); /* Chrome, Safari, Opera */
+    transform: rotate(-50deg);
+    position: absolute;
+    padding: inherit;
+    top: 100px;
+   
+}
+p.titreDetail
+{
+    padding: inherit;
+}
+#fondDetail
+{
+    background-color: #E4E4E4;
+}
+.thAcceuil
+{
+    height: 43px;
+   font-size: 0.9em;
+}
+
+#titre_session
+{
+    margin-top: -35px;
+}
+
+#rouge
+{
+    border: 1px red solid;
 }

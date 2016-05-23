@@ -35,7 +35,7 @@ ul{list-style-type:none;}
 
 /*----CORPS----*/
 #corps{color:#8D8D8D;  clear:both;}
-#corps{width:65%; position:relative; background:#F4F4F4; color:#707070; margin:0 auto; padding:10%; padding-top:5%;}
+#corps{width:70%; position:relative; background:#F4F4F4; color:#707070; margin:0 auto; padding:65px 8% 10% 8%; }
 #corps h2{background:#F4F4F4; color:#6E6C00; font-size:24px; height:70px; line-height:70px;}
 #corps p{padding:0 38px 11px 0;}
 /*----/CORPS----*/
