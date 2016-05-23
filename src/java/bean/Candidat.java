@@ -35,8 +35,6 @@ public class Candidat {
         return prenom;
     }
 
-   
-
     public int getId_etatCandidature() {
         return id_etatCandidature;
     }
