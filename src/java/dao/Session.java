@@ -51,6 +51,7 @@ public class Session {
     }
 
     /*
+   
     public static List<UneSession> getSessionCandidateByPersonne(int idPersonne) throws SQLException {
             List<UneSession> result = new ArrayList<UneSession>();
             String intituleSession = null;
