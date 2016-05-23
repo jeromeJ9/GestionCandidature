@@ -56,7 +56,7 @@ public class Candidat {
             case 3:
                 return "Refusé";
             default:
-                return "En attente de traitements";
+                return "En attente de traitement";
         }
         
     }
