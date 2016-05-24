@@ -11,7 +11,6 @@ public class UneSession {
     private String intituleSession;
     private int nbPlaces;
     private List<Candidat> listeDePersonnes;
-    private List<Candidat> candidatsValides;
     private String dateDebutSessionJMA;
     private String dateSessionMA;
     private String debutInscription;
@@ -19,13 +18,6 @@ public class UneSession {
 
     public UneSession() {
     }
-
-    public UneSession(String intituleSession, List<Candidat> listeDePersonnes) {
-        this.intituleSession = intituleSession;
-        this.listeDePersonnes = listeDePersonnes;
-    }
-
-    
     
     public UneSession(int idSession, String intituleSession, List<Candidat> listeDePersonnes, int nbPlaces, Date dateDebutSession,Date debutInscription,Date finInscription ) {
         this.idSession = idSession;
@@ -36,14 +28,14 @@ public class UneSession {
         this.dateSessionMA = formatDateMA(dateDebutSession);
         this.debutInscription = formatDateJMA(debutInscription);
         this.finInscription = formatDateJMA(finInscription);
-        candidatsValides();
+       
     }
     
 
     public int getIdSession() {
         return idSession;
     }
-     public String getIntituleSession() {
+    public String getIntituleSession() {
         return intituleSession;
     }
     public List<Candidat> getListeDePersonnes() {
@@ -52,13 +44,10 @@ public class UneSession {
     public int getNbPlaces() {
         return nbPlaces;
     }
-     public List<Candidat> getCandidatsValides() {
-        return candidatsValides;
-    }
     public String getDateDebutSessionJMA() {
         return dateDebutSessionJMA;
     }
-     public String getDateSessionMA() {
+    public String getDateSessionMA() {
         return dateSessionMA;
     }
     public String getDebutInscription() {
@@ -69,25 +58,18 @@ public class UneSession {
     }
     
     public int getNbPlacesRestantes(){
-        return nbPlaces-candidatsValides.size();
+        return nbPlaces-getNbInscrit();
     }
     
-    public int nbInscrit(){
-        return candidatsValides.size();
-    }
-    
-    private void candidatsValides(){
+    public int getNbInscrit(){
         List<Candidat> lesPersonnesInscrites = new ArrayList<Candidat>();
         for (Candidat unePerso : listeDePersonnes){
             if (unePerso.getId_etatCandidature() == 2)
                 lesPersonnesInscrites.add(unePerso);
         }
-        this.candidatsValides = lesPersonnesInscrites;
-        
+        return lesPersonnesInscrites.size();
     }
-    
-    
-    
+   
     private String formatDateJMA(Date date){
         Calendar moisJour = new GregorianCalendar();
         moisJour.setTime(date);
@@ -100,30 +82,46 @@ public class UneSession {
         String mois = null;
         Calendar moisJour = new GregorianCalendar();
         moisJour.setTime(date);
-        if ((moisJour.get(Calendar.MONTH)+1) == 1)
-            mois = "janvier";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 2)
-            mois = "fevrier";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 3)
-            mois = "mars";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 4)
-            mois = "avril";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 5)
-            mois = "mai";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 6)
-            mois = "juin";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 7)
-            mois = "juillet";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 8)
-            mois = "aout";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 9)
-            mois = "septembre";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 10)
-            mois = "octobre";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 11)
-            mois = "novembre";
-        else if ((moisJour.get(Calendar.MONTH)+1) == 12)
-            mois = "decembre";
+        switch (moisJour.get(Calendar.MONTH)+1) {
+            case 1:
+                mois = "janvier";
+                break;
+            case 2:
+                mois = "fevrier";
+                break;
+            case 3:
+                mois = "mars";
+                break;
+            case 4:
+                mois = "avril";
+                break;
+            case 5:
+                mois = "mai";
+                break;
+            case 6:
+                mois = "juin";
+                break;
+            case 7:
+                mois = "juillet";
+                break;
+            case 8:
+                mois = "aout";
+                break;
+            case 9:
+                mois = "septembre";
+                break;
+            case 10:
+                mois = "octobre";
+                break;
+            case 11:
+                mois = "novembre";
+                break;
+            case 12:
+                mois = "decembre";
+                break;
+            default:
+                break;
+        }
         
         return ( mois+" " +moisJour.get(Calendar.YEAR));
         
@@ -142,7 +140,6 @@ public class UneSession {
         hash = 53 * hash + (this.intituleSession != null ? this.intituleSession.hashCode() : 0);
         hash = 53 * hash + this.nbPlaces;
         hash = 53 * hash + (this.listeDePersonnes != null ? this.listeDePersonnes.hashCode() : 0);
-        hash = 53 * hash + (this.candidatsValides != null ? this.candidatsValides.hashCode() : 0);
         hash = 53 * hash + (this.dateDebutSessionJMA != null ? this.dateDebutSessionJMA.hashCode() : 0);
         hash = 53 * hash + (this.dateSessionMA != null ? this.dateSessionMA.hashCode() : 0);
         hash = 53 * hash + (this.debutInscription != null ? this.debutInscription.hashCode() : 0);
@@ -184,9 +181,6 @@ public class UneSession {
             return false;
         }
         if (this.listeDePersonnes != other.listeDePersonnes && (this.listeDePersonnes == null || !this.listeDePersonnes.equals(other.listeDePersonnes))) {
-            return false;
-        }
-        if (this.candidatsValides != other.candidatsValides && (this.candidatsValides == null || !this.candidatsValides.equals(other.candidatsValides))) {
             return false;
         }
         return true;

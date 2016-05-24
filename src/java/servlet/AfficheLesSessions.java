@@ -1,11 +1,8 @@
 package servlet;
 
-import bean.Candidat;
 import bean.UneSession;
-import dao.LesSessions;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,36 +25,31 @@ public class AfficheLesSessions extends HttpServlet {
         
        
         List<UneSession> lesSessions = null;
+        LesServicesGestion service = new LesServicesGestion();
         
-        
-        //setAttribute toutes les sessions
+        //  setAttribute toutes les sessions
         try {
-            LesServicesGestion service = new LesServicesGestion();
             lesSessions = service.getAllSessions();
             request.setAttribute("LesSessionsCandidates", lesSessions);
-        }catch (SQLException ex) {
-            Logger.getLogger(AfficheLesSessions.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
             
         //   retour de la jsp pour details d'une session
-
-        int idSession =0;
         if (request.getParameter("session") != null ){
-            idSession = Integer.parseInt((String)request.getParameter("session"));
-             
+            int idSession = Integer.parseInt((String)request.getParameter("session"));
             for (UneSession laSession : lesSessions){   
                 if (laSession.getIdSession() == idSession){
                     request.setAttribute("laSessionDemandee", laSession);
                 }
             }
         }
-            
-            
+        }catch (SQLException ex) {
+            Logger.getLogger(AfficheLesSessions.class.getName()).log(Level.SEVERE, null, ex);
+        }
         getServletContext().getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
          
     }
 
+    
+    
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

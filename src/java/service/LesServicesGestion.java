@@ -23,12 +23,7 @@ public class LesServicesGestion {
         return lesSessions;
     }
     
-    /**
-     *
-     * @param listePersonne
-     * @return
-     * @throws SQLException
-     */
+ /*
     public List<Candidat> getCandidatValideBySession (List<Candidat> listePersonne) throws SQLException{
         List<Candidat> lesCandidats = new ArrayList<Candidat>();
         for ( Candidat unPerso : listePersonne )
@@ -47,7 +42,7 @@ public class LesServicesGestion {
             }
         return compteur;
     }
-    
+    */
     
     
     public int getMaxIdCandidatBySession (int id) throws SQLException {

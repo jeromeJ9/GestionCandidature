@@ -4,7 +4,6 @@ import bean.Candidat;
 import bean.UneSession;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -20,7 +19,6 @@ import service.LesServicesGestion;
 @WebServlet(name = "DetailCandidatures", urlPatterns = {"/DetailCandidatures"})
 public class DetailCandidatures extends HttpServlet {
     private String idSession = null;
-    private int nbPlacesDispo = 0;
     private int idSessionInt = 0;
     private LesServicesGestion serv;
     
@@ -29,34 +27,28 @@ public class DetailCandidatures extends HttpServlet {
             throws ServletException, IOException {
         
         serv = new LesServicesGestion();
-        // demande d'affichage de tous les candidats d'une session donnée
+       
+        
+        // Affichage de tous les candidats d'une session dont id est en parametre idSession
         try {
             idSession = (String) request.getParameter("idSession");
-            UneSession uneSession = null;
-            int id = Integer.parseInt(idSession);
-            uneSession = dao.Session.getCandidatsBySession(id);     /////le service ???,
+            idSessionInt = Integer.parseInt(idSession);
+            UneSession uneSession = dao.Session.getCandidatsBySession(idSessionInt);     /////le service ???,
             request.setAttribute("detailsSession", uneSession);
             
         } catch (SQLException ex) {
             Logger.getLogger(DetailCandidatures.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-      
-        
-        // #### requete get de la JSP DetailSession pour afficher les autres candidatures d'un candidat
-        String idPersonneForDetail = (String)request.getParameter("personne");
-        
+        //  requete get de la JSP DetailSession pour afficher les autres candidatures d'un candidat avec parametre idCandidat
+        String idPersonneForDetail = (String)request.getParameter("idCandidat");
         if ( idPersonneForDetail != null){
-            request.setAttribute("detail", idPersonneForDetail);
+            request.setAttribute("idCandidatPourDetail", idPersonneForDetail);
             int idPersonneForDetailInt = Integer.parseInt(idPersonneForDetail);
             
-            try {/*
-                List<UneSession> sessions = new ArrayList<UneSession>();
-                sessions = dao.Session.getSessionCandidateByPersonne(idPersonneForDetailInt);
-                request.setAttribute("listeCandidature", sessions);
-                */
-            HashMap<String, List<String> > lesSessionsCandidates = new HashMap<String, List<String>>();
-            lesSessionsCandidates = serv.getListeSessionCandidateByCandidat(idPersonneForDetailInt);
+            try {
+                HashMap<String, List<String> > lesSessionsCandidates = null;
+                lesSessionsCandidates = serv.getListeSessionCandidateByCandidat(idPersonneForDetailInt);
                 request.setAttribute("listeCandidature", lesSessionsCandidates);
                
             } catch (SQLException ex) {
@@ -64,17 +56,9 @@ public class DetailCandidatures extends HttpServlet {
             }
         }
         
-        
-        
-        
+        // attribute set par la methode POST de cette class
         if(request.getParameter("tropInscris") != null)
             request.setAttribute("tropInscris", request.getParameter("tropInscris"));
-        
-        
-        
-        
-        
-        
         
         getServletContext().getRequestDispatcher("/WEB-INF/DetailSession.jsp").forward(request, response);
     }
@@ -84,36 +68,34 @@ public class DetailCandidatures extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-        // traitement de l'enregistrement de tous les etats de candidatures de tous les candidats d'une session
-        if (Integer.parseInt(idSession) != 0)
-            idSessionInt = Integer.parseInt(idSession);
-        UneSession uneSession = null;
-      
-            
-          
-            UneSession session = dao.Session.getCandidatsBySession(idSessionInt);
+            // traitement de l'enregistrement de tous les etats de candidatures de tous les candidats d'une session
+            // renvoyé par le formulaire dans une liste de bouton radio ou ->
+            //                  le name est l'id du candidat et la valeur l'etat de candidature
             int compteur =0;
+            // on compte le nombre de candidats validés
+            System.out.println("idsession"+idSessionInt);
             for ( int i =1; i <= serv.getMaxIdCandidatBySession(idSessionInt); i++ ){
                 String idPerson = Integer.toString(i);
                 if ("2".equals((String) request.getParameter(idPerson)) ){
                     compteur++;
                 }
             }
-            if (compteur <= session.getNbPlaces()){
+            // on verifie qu'il y a suffisamment de place dispo
+            UneSession session = dao.Session.getCandidatsBySession(idSessionInt);
+            if (compteur <= session.getNbPlaces()){ 
                 for (Candidat unePersonne : session.getListeDePersonnes()){
                 String idPersonS = Integer.toString(unePersonne.getId());
                 String etatCandidat = (String) request.getParameter(idPersonS);
-                  if (etatCandidat != null){
+                    if (etatCandidat != null){
                         int etatCandidature = Integer.parseInt(etatCandidat);
                         dao.Candidature.setEtatCandidatureByIdPersonneAndIdSession(unePersonne.getId(), idSessionInt, etatCandidature);
-                  }
+                    }
                 }
                 response.sendRedirect(request.getContextPath() + "/AffichageSessions");
             }
+            // sinon on re-affiche la liste initial des candidature ( avant check de bouton radio )
             else {
-                
-                    request.setAttribute("tropDeValidation", uneSession);
-                    response.sendRedirect(request.getContextPath() + "/DetailCandidatures?tropInscris=true&idSession="+idSessionInt);
+                response.sendRedirect(request.getContextPath() + "/DetailCandidatures?tropInscris=true&idSession="+idSessionInt);
                   
             }
             

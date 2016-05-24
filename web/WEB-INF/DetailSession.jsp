@@ -35,20 +35,20 @@
                         <th><p class="titreDetail" style="padding: inherit;top: 164px;right: 56px">Mise en attente</p></th>
                     </tr>
 
-                    <c:forEach items="${detailsSession.getListeDePersonnes()}" var="personne">
+                    <c:forEach items="${detailsSession.getListeDePersonnes()}" var="candidat">
                     <tr style="border-bottom:  1px #7C7900 solid;">
                         
                         <td class="nom" >
-                           <a  id="detailCandid" href ="DetailCandidatures?personne=${personne.getId()}&idSession=${detailsSession.getIdSession()}" >
-                           <c:out value="${personne.getNom()}"/></a>
+                           <a  id="detailCandid" href ="DetailCandidatures?idCandidat=${candidat.getId()}&idSession=${detailsSession.getIdSession()}" >
+                           <c:out value="${candidat.getNom()}"/></a>
                         </td>
                        
                         
                         <td class="prenom" style="text-align: left;">
-                           <c:out value="${personne.getPrenom()}"/>
+                           <c:out value="${candidat.getPrenom()}"/>
                         </td>
                         <td class="attente">
-                           <c:if test="${personne.getId_etatCandidature() == 0}" >
+                           <c:if test="${candidat.getId_etatCandidature() == 0}" >
                                 En attente de traitement
                            </c:if>
                           
@@ -56,25 +56,25 @@
                         
                                               
                         <td>
-                           <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="2" 
-                                  <c:if test="${(personne.getId_etatCandidature() == 2) }">checked</c:if> >
+                           <INPUT type="radio" name="<c:out value="${candidat.getId()}"/>" value="2" 
+                                  <c:if test="${(candidat.getId_etatCandidature() == 2) }">checked</c:if> >
                         </td>
                         
                         <td class="refuse">
-                           <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="3"
-                                    <c:if test="${personne.getId_etatCandidature() == 3}" >
+                           <INPUT type="radio" name="<c:out value="${candidat.getId()}"/>" value="3"
+                                    <c:if test="${candidat.getId_etatCandidature() == 3}" >
                                         checked
                                     </c:if>>
                         </td>
                         
                         <td class="mise">
-                           <INPUT type="radio" name="<c:out value="${personne.getId()}"/>" value="1"
-                                    <c:if test="${personne.getId_etatCandidature() == 1}" >
+                           <INPUT type="radio" name="<c:out value="${candidat.getId()}"/>" value="1"
+                                    <c:if test="${candidat.getId_etatCandidature() == 1}" >
                                         checked
                                     </c:if>>
                         </td>
                         
-                        <c:if test="${detail == personne.getId()}">
+                        <c:if test="${idCandidatPourDetail == candidat.getId()}">
                             <c:if test="${listeCandidature.size() > 1}">
                             <tr id="fondDetail" >
                                 

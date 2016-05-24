@@ -50,31 +50,5 @@ public class Session {
             return result;
     }
 
-    /*
    
-    public static List<UneSession> getSessionCandidateByPersonne(int idPersonne) throws SQLException {
-            List<UneSession> result = new ArrayList<UneSession>();
-            String intituleSession = null;
-            Connection connection = DbAgrioteSP1.getConnection();
-            String sql = "SELECT f.intitule, c.id_etat_candidature FROM candidature c\n" +
-                        "        INNER JOIN session s\n" +
-                        "        ON s.id_session = c.id_session\n" +
-                        "        INNER JOIN formation f\n" +
-                        "        ON f.id_formation = s.id_formation\n" +
-                        "        WHERE (c.id_personne = '"+idPersonne+"' );";
-            Statement ordre = connection.createStatement();
-            ResultSet rs = ordre.executeQuery(sql);
-            while (rs.next() ) {
-                Candidat person = null;
-                person = new Candidat(rs.getInt("c.id_etat_candidature"));
-                List<Candidat> listePersonnes = new ArrayList<Candidat>();
-                listePersonnes.add(person);
-                intituleSession = rs.getString("intitule");
-                result.add(new UneSession(intituleSession, listePersonnes));
-            }
-            connection.close();
-
-            return result;
-    }
-*/
 }

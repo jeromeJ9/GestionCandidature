@@ -8,9 +8,7 @@ public class Candidat {
     private int id_etatCandidature;
     private String etatCandidature;
 
-    public Candidat(int id_etatCandidature) {
-        this.id_etatCandidature = id_etatCandidature;
-        
+    public Candidat() {
     }
     public Candidat(int id,String nom, String prenom, int id_etatCandidature) {
         this.id = id;
@@ -18,29 +16,20 @@ public class Candidat {
         this.prenom = prenom;
         this.id_etatCandidature = id_etatCandidature;
         this.etatCandidature = getEtatCandid(id_etatCandidature);
-        
     }
 
     public int getId() {
         return id;
     }
-
-   
     public String getNom() {
         return nom;
     }
-
-   
     public String getPrenom() {
         return prenom;
     }
-
     public int getId_etatCandidature() {
         return id_etatCandidature;
     }
-
-   
-
     public String getEtatCandidature() {
         return etatCandidature;
     }
