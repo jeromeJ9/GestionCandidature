@@ -5,6 +5,8 @@
  */
 package dao;
 
+import bean.Candidat;
+import bean.UneSession;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -12,23 +14,26 @@ import static org.junit.Assert.*;
  *
  * @author jerom
  */
-public class CandidatureTest {
+public class CandidatureTest extends DaoTest{
     
     public CandidatureTest() {
     }
 
-    /**
-     * Test of setEtatCandidatureByIdPersonneAndIdSession method, of class Candidature.
-     */
+   
     @Test
     public void testSetEtatCandidatureByIdPersonneAndIdSession() throws Exception {
         System.out.println("setEtatCandidatureByIdPersonneAndIdSession");
-        int idPersonne = 0;
-        int idSession = 0;
-        int etatCandidature = 0;
-        Candidature.setEtatCandidatureByIdPersonneAndIdSession(idPersonne, idSession, etatCandidature);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int idPersonne = 2;
+        int idSession = 2;
+        int etatCandidature = 2;
+        dao.Candidature.setEtatCandidatureByIdPersonneAndIdSession(idPersonne, idSession, etatCandidature);
+        UneSession session = dao.Session.getSessionWithCandidats(idSession);
+        boolean result = false;
+        for (Candidat unCandidat : session.getListeDePersonnes()){
+            if (unCandidat.getId() == idPersonne && unCandidat.getId_etatCandidature() == 2)
+                result = true;
+        }
+        assertTrue(result);
     }
     
 }

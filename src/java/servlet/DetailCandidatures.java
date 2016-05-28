@@ -33,7 +33,7 @@ public class DetailCandidatures extends HttpServlet {
         try {
             idSession = (String) request.getParameter("idSession");
             idSessionInt = Integer.parseInt(idSession);
-            UneSession uneSession = dao.Session.getCandidatsBySession(idSessionInt);     /////le service ???,
+            UneSession uneSession = serv.getSessionWithCandidats(idSessionInt);    
             request.setAttribute("detailsSession", uneSession);
             
         } catch (SQLException ex) {
@@ -81,14 +81,14 @@ public class DetailCandidatures extends HttpServlet {
                 }
             }
             // on verifie qu'il y a suffisamment de place dispo
-            UneSession session = dao.Session.getCandidatsBySession(idSessionInt);
+            UneSession session = serv.getSessionWithCandidats(idSessionInt);
             if (compteur <= session.getNbPlaces()){ 
                 for (Candidat unePersonne : session.getListeDePersonnes()){
                 String idPersonS = Integer.toString(unePersonne.getId());
                 String etatCandidat = (String) request.getParameter(idPersonS);
                     if (etatCandidat != null){
                         int etatCandidature = Integer.parseInt(etatCandidat);
-                        dao.Candidature.setEtatCandidatureByIdPersonneAndIdSession(unePersonne.getId(), idSessionInt, etatCandidature);
+                        serv.setEtatCandidatureByIdPersonneAndIdSession(unePersonne.getId(), idSessionInt, etatCandidature);
                     }
                 }
                 response.sendRedirect(request.getContextPath() + "/AffichageSessions");

@@ -29,7 +29,7 @@ public class AfficheLesSessions extends HttpServlet {
         
         //  setAttribute toutes les sessions
         try {
-            lesSessions = service.getAllSessions();
+            lesSessions = service.getAllSessionsWithCandidats();
             request.setAttribute("LesSessionsCandidates", lesSessions);
             
         //   retour de la jsp pour details d'une session

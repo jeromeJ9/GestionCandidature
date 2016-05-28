@@ -17,7 +17,7 @@ public class SessionTest extends DaoTest{
     }
 
     /**
-     * Test of getCandidatsBySession method, of class Session.
+     * Test of getSessionWithCandidats method, of class Session.
      */
     @Test
     public void testGetCandidatsBySession() throws Exception {
@@ -36,7 +36,7 @@ public class SessionTest extends DaoTest{
         UneSession expResult = new UneSession(6, "Bac S.T.I. : génie mécanique, génie électrotechnique", listePersonne, 14, debut, debutIns,finIns );
         //System.out.println("expResult"+expResult.getListeDePersonnes().toString());
         UneSession result = null;
-        result = dao.Session.getCandidatsBySession(6);
+        result = dao.Session.getSessionWithCandidats(6);
         //System.out.println("result"+result.getListeDePersonnes().toString());
         assertEquals(result, expResult );
     }

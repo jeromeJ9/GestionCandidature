@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Session {
     
-    public static UneSession getCandidatsBySession(int id_session) throws SQLException {
+    public static UneSession getSessionWithCandidats(int id_session) throws SQLException {
             UneSession result = null;
             List<Candidat> listePersonnes = new ArrayList<Candidat>();
             String intituleSession = null;
