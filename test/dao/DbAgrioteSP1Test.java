@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public class DbAgrioteSP1Test {
+public class DbAgrioteSP1Test extends DaoTest{
     
     
     @Test

@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  *
  * @author jerom
  */
-public class LesSessionsTest {
+public class LesSessionsTest extends DaoTest {
     
     public LesSessionsTest() {
     }
